@@ -3,10 +3,10 @@
    ========================================================================== */
 const CONFIG = {
   // 1. Person's Name
-  name: "Sarah",
+  name: "chioma",
 
   // 2. Target Birthday Date (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)
-  birthdayDate: "2026-12-25T00:00:00",
+  birthdayDate: "2026-10-27T00:00:00",
 
   // 3. Typewriter Personal Message
   typedMessage: `From the moment you entered my life, everything became brighter and warmer.
