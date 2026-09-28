@@ -70,6 +70,7 @@ function setupWelcomeFlow() {
 
   startBtn.addEventListener('click', () => {
     triggerConfetti(3000);
+    playAudioOnceUserGesture();
     wrapper.classList.add('show-flow');
     
     // Smooth scroll to Gift section
@@ -93,6 +94,7 @@ function setupGiftBox() {
 
   giftBox.addEventListener('click', () => {
     if (!giftBox.classList.contains('open')) {
+      playAudioOnceUserGesture();
       giftBox.classList.add('open');
       triggerConfetti(2000);
       setTimeout(() => {
@@ -179,6 +181,19 @@ function setupCakeInteraction() {
 /* ==========================================================================
    6. MUSIC PLAYER CONTROLS
    ========================================================================== */
+function playAudioOnceUserGesture() {
+  const audio = document.getElementById('bg-music');
+  if (!audio) return;
+
+  if (audio.paused) {
+    audio.loop = true;
+    const playPromise = audio.play();
+    if (playPromise) {
+      playPromise.catch(() => {});
+    }
+  }
+}
+
 function setupMusicPlayer() {
   const audio = document.getElementById('bg-music');
   const playBtn = document.getElementById('play-pause-btn');
@@ -196,15 +211,24 @@ function setupMusicPlayer() {
 
   playBtn.addEventListener('click', () => {
     if (audio.paused) {
-      audio.play().then(() => {
-        playBtn.textContent = '⏸️';
-        disc.classList.add('spinning');
-      }).catch(e => console.log("Audio playback error:", e));
+      playAudioOnceUserGesture();
+      playBtn.textContent = '⏸️';
+      disc.classList.add('spinning');
     } else {
       audio.pause();
       playBtn.textContent = '▶️';
       disc.classList.remove('spinning');
     }
+  });
+
+  audio.addEventListener('play', () => {
+    playBtn.textContent = '⏸️';
+    disc.classList.add('spinning');
+  });
+
+  audio.addEventListener('pause', () => {
+    playBtn.textContent = '▶️';
+    disc.classList.remove('spinning');
   });
 
   audio.addEventListener('timeupdate', () => {
@@ -224,6 +248,10 @@ function setupMusicPlayer() {
   volumeBar.addEventListener('input', () => {
     audio.volume = volumeBar.value / 100;
   });
+
+  if (audio) {
+    audio.volume = 0.8;
+  }
 }
 
 /* ==========================================================================
@@ -271,6 +299,7 @@ function setupCountdown() {
 function setupReplay() {
   const replayBtn = document.getElementById('replay-btn');
   replayBtn.addEventListener('click', () => {
+    playAudioOnceUserGesture();
     window.scrollTo({ top: 0, behavior: 'smooth' });
     triggerConfetti(3000);
   });
@@ -398,3 +427,4 @@ function triggerConfetti(durationMs = 2500) {
 
   animateConfetti();
 }
+
