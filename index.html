@@ -21,6 +21,9 @@
   <!-- Floating Ambient Elements -->
   <div class="floating-bg-elements" id="floating-bg"></div>
 
+  <!-- Background Music - starts muted, plays on page load -->
+  <audio id="bg-music" src="a-cheerful-ukulele-waltz%20(1).mp3" preload="auto" autoplay loop muted></audio>
+
   <!-- 1. LOADING SCREEN -->
   <div id="loading-screen" class="screen">
     <div class="loader-content">
@@ -168,13 +171,10 @@
           <div class="music-header">
             <div class="disc-icon" id="disc-icon">🎵</div>
             <div class="song-info">
-              <div class="song-title" id="song-title">Birthday Celebration Track</div>
-              <div class="song-artist">Press play for background vibes</div>
+              <div class="song-title" id="song-title">A Cheerful Ukulele Waltz</div>
+              <div class="song-artist">Now playing in the background ✨</div>
             </div>
           </div>
-
-          <!-- The file is stored in the repository root. Playback starts after the visitor taps Begin. -->
-          <audio id="bg-music" src="a-cheerful-ukulele-waltz.mp3" preload="metadata" loop></audio>
 
           <div class="controls-row">
             <button id="play-pause-btn" class="icon-btn" aria-label="Play or Pause">▶️</button>
